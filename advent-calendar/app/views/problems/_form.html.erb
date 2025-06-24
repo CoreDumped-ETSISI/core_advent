@@ -1,0 +1,42 @@
+<%= form_with(model: problem) do |form| %>
+  <% if problem.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+
+      <ul>
+        <% problem.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :content %>
+    <%= form.rich_textarea :content %>
+  </div>
+
+  <div>
+    <%= form.label :correct_answer, style: "display: block" %>
+    <%= form.text_field :correct_answer %>
+  </div>
+
+  <div>
+    <%= form.label :unlock_time, style: "display: block" %>
+    <%= form.datetime_field :unlock_time %>
+  </div>
+
+  <div>
+    <%= form.label :lock_time, style: "display: block" %>
+    <%= form.datetime_field :lock_time %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

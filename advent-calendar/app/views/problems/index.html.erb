@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Problems" %>
+
+<h1>Problems</h1>
+
+<div id="problems">
+  <% @problems.each do |problem| %>
+    <p>
+      <%= link_to problem.title, problem %>
+    </p>
+  <% end %>
+</div>
+<%= link_to "Back to year selection", root_path%>
+<%= link_to "New problem", new_problem_path %>
