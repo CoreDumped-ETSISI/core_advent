@@ -1,6 +1,8 @@
 class Problem < ApplicationRecord
     has_rich_text :content
 
+    has_many :answers, dependent: :destroy
+
     validates :title, presence: true
     validates :unlock_time, comparison: { less_than: :lock_time }
     validates :content, presence: true
@@ -19,5 +21,6 @@ class Problem < ApplicationRecord
 
   def clean_answer
     self.correct_answer.downcase!
+    self.correct_answer.strip!
   end
 end

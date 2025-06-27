@@ -2,9 +2,11 @@
 
 <%= render @problem %>
 
-<div>
-  <%= link_to "Edit this problem", edit_problem_path(@problem) %> |
-  <%= link_to "Back to problems", problems_by_year_path(@problem.unlock_time.year) %>
+<%= render partial: "answers/form", locals: {answer: @problem.answers.build, problem: @problem} %>
 
+<div>
+  <%= link_to "Back to problems", problems_by_year_path(@problem.unlock_time.year) %> |
+  <%= link_to "Edit this problem", edit_problem_path(@problem) %> |
+  <%= link_to "See answers", problem_answers_path(@problem) %>
   <%= button_to "Destroy this problem", @problem, method: :delete %>
 </div>
