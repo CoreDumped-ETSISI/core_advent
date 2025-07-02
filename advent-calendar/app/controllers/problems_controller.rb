@@ -8,6 +8,11 @@ class ProblemsController < ApplicationController
   # GET /:year
   def index
     @problems = Problem.for_year params.expect(:year)
+    respond_to do |format|
+      if @problems.size === 0
+        format.html { render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found }
+      end
+    end
   end
 
   # GET /problems/1 or /problems/1.jsons
@@ -30,10 +35,8 @@ class ProblemsController < ApplicationController
     respond_to do |format|
       if @problem.save
         format.html { redirect_to @problem, notice: "Problem was successfully created." }
-        format.json { render :show, status: :created, location: @problem }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @problem.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +46,8 @@ class ProblemsController < ApplicationController
     respond_to do |format|
       if @problem.update(problem_params)
         format.html { redirect_to @problem, notice: "Problem was successfully updated." }
-        format.json { render :show, status: :ok, location: @problem }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @problem.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +58,6 @@ class ProblemsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to problems_path, status: :see_other, notice: "Problem was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
