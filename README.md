@@ -6,14 +6,16 @@
 
 ## Table of Contents
 
-- [About](#about)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Authors and Contributors](#authors-and-contributors)
-- [Code of Conduct](#code-of-conduct)
-- [Changelog](#changelog)
+- [Project Name](#project-name)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Authors and Contributors](#authors-and-contributors)
+  - [Code of Conduct](#code-of-conduct)
+  - [Changelog](#changelog)
 
 ## About
 
@@ -21,7 +23,13 @@
 
 ## Installation
 
-[Instructions on how to install and set up the project. Include any dependencies that need to be installed and how to install them.]
+1. Install ruby and rails
+2. Clone this repository
+3. Run `bundle install`
+4. `rails db:migrate`
+5. Run `rails console`, create an admin user `User.create(email: "email@am.es", username: "username", password: "1234", password_confirmation: "1234", admin: true)`
+6. `exit`
+7. Run `rails server` and access the localhost
 
 ## Usage
 
