@@ -7,7 +7,7 @@ class Ability
 
     return unless user.present?
     # Logged in users can:
-    can [ :create ], Answer, user: user, problem: { unlock_time: ..Time.current, lock_time: Time.current.. }
+    can [ :create ], Answer, user: user
     can :read, User, [ :email, :username ], id: user.id
 
     return unless user.admin?

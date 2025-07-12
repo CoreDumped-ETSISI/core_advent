@@ -2,11 +2,17 @@
 
 <%= render @problem %>
 
-<%= render partial: "answers/form", locals: {answer: @problem.answers.build, problem: @problem} %>
+<% if can? :create, Answer %>
+  <%= render "answers/form" %>
+<% else %>
+  <%= link_to "Login to answer", login_path %>
+<% end %>
 
 <div>
-  <%= link_to "Back to problems", problems_by_year_path(@problem.unlock_time.year) %> |
+  <%= link_to "Back to problems", problems_by_year_path(@problem.unlock_time.year) %> 
+  <% if can? :manage, @problem %> |
   <%= link_to "Edit this problem", edit_problem_path(@problem) %> |
   <%= link_to "See answers", problem_answers_path(@problem) %>
   <%= button_to "Destroy this problem", @problem, method: :delete %>
+  <% end %>
 </div>

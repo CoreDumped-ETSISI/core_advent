@@ -12,4 +12,6 @@
   <% end %>
 </div>
 <%= link_to "Back to year selection", root_path%>
+<% if can? :manage, @problem %> |
 <%= link_to "New problem", new_problem_path %>
+<% end %>

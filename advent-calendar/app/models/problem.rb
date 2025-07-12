@@ -11,12 +11,6 @@ class Problem < ApplicationRecord
 
     scope :for_year, ->(year) { where(unlock_time: Date.new(year.to_i).beginning_of_year..Date.new(year.to_i).end_of_year) }
 
-    scope :available_years, -> {
-    select("DISTINCT strftime('%Y',unlock_time) AS year")
-    .order("year DESC")
-    .map { |e| e.year.to_i }
-  }
-
   private
 
   def clean_answer

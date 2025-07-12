@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: %i[ show edit update destroy ]
   before_action :set_problem
+  authorize_resource
 
   # GET /answers or /answers.json
   def index
@@ -23,7 +24,8 @@ class AnswersController < ApplicationController
   # POST /answers or /answers.json
   def create
     @answer = @problem.answers.build(answer_params)
-    @answer.correct = @answer.answer_text.downcase.trim === @problem.correct_answer
+    @answer.user = current_user  # Assign the current user
+    @answer.correct = @answer.answer_text.downcase.strip === @problem.correct_answer
 
     respond_to do |format|
       save = @answer.save

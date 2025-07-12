@@ -1,22 +1,28 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: %i[ show edit update destroy ]
+  authorize_resource except: [:year_index, :index, :show]
 
   # GET /
   def year_index
-    @years = Problem.available_years
+    accessible_problems = Problem.accessible_by(current_ability)
+    @years = accessible_problems.select("DISTINCT strftime('%Y',unlock_time) AS year")
+                                .order("year DESC")
+                                .map { |e| e.year.to_i }
   end
   # GET /:year
   def index
     @problems = Problem.for_year params.expect(:year)
-    respond_to do |format|
-      if @problems.size === 0
-        format.html { render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found }
-      end
+    # Only show problems that the user can read (unlocked ones)
+    @problems = @problems.accessible_by(current_ability)
+    
+    if @problems.size === 0
+      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
     end
   end
 
   # GET /problems/1 or /problems/1.jsons
   def show
+    @answer = @problem.answers.build
   end
 
   # GET /problems/new
@@ -58,6 +64,12 @@ class ProblemsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to problems_path, status: :see_other, notice: "Problem was successfully destroyed." }
+    end
+  end
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: exception.message }
     end
   end
 
