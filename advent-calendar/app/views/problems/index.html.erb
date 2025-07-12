@@ -3,6 +3,7 @@
 <% content_for :title, "Problems" %>
 
 <h1>Problems</h1>
+<%= link_to "Ranking", ranking_by_year_path(@year)%>
 
 <div id="problems">
   <% @problems.each do |problem| %>

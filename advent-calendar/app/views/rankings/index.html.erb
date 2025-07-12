@@ -1,0 +1,65 @@
+<div >
+    <%= link_to "Back to problems", problems_by_year_path(@year)%>
+
+  <div >
+    <h2>Rankings for <%= @year %></h2>
+  </div>
+
+  <% if @ranking.empty? %>
+    <div >
+      <p>No ranking data available for <%= @year %>.</p>
+    </div>
+  <% else %>
+    <div >
+      <table>
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>User</th>
+            <th>Problems Completed</th>
+            <th>Total Time</th>
+            <th>Average Time per Problem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ranking.each do |entry| %>
+            <tr >
+              <td >
+                <span >
+                  <%= entry[:position] %>
+                </span>
+              </td>
+              <td >
+                <strong><%= entry[:user] %></strong>
+              </td>
+              <td >
+                <span ><%= entry[:problems_completed] %></span>
+              </td>
+              <td >
+                <%= format_duration(entry[:total_time_seconds]) %>
+              </td>
+              <td >
+                <%= format_duration(entry[:average_time_per_problem]) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div >
+      <div >
+        <h3>Total Participants</h3>
+        <p><%= @ranking.size %></p>
+      </div>
+      <div >
+        <h3>Total Problems Solved</h3>
+        <p><%= @ranking.sum { |r| r[:problems_completed] } %></p>
+      </div>
+      <div >
+        <h3>Average Problems per User</h3>
+        <p><%= (@ranking.sum { |r| r[:problems_completed] }.to_f / @ranking.size).round(1) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

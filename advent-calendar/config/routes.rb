@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   delete "/logout" => "sessions#destroy", as: :logout
   get "up" => "rails/health#show", as: :rails_health_check
+  get ":year/ranking" => "rankings#index", as: :ranking_by_year
   get ":year" => "problems#index", as: :problems_by_year
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

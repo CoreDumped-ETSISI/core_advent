@@ -11,7 +11,8 @@ class ProblemsController < ApplicationController
   end
   # GET /:year
   def index
-    @problems = Problem.for_year params.expect(:year)
+    @year = params.expect(:year)
+    @problems = Problem.for_year @year
     # Only show problems that the user can read (unlocked ones)
     @problems = @problems.accessible_by(current_ability)
     
