@@ -1,12 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Years</h1>
-<% if current_user %>
-  <p>Welcome, <%= current_user.username %>!</p>
-  <%= button_to "Logout", logout_path, method: :delete %>
-<% else %>
-  <%= link_to "Login", login_path %>
-<% end %>
+
 <div id="years">
   <% @years.each do |year| %>
     <p>
@@ -14,3 +9,6 @@
     </p>
   <% end %>
 </div>
+<% if can? :manage, @problem %> |
+  <%= link_to "New problem", new_problem_path %>
+<% end %>

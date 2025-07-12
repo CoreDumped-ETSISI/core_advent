@@ -1,11 +1,11 @@
-<p style="color: green"><%= notice %></p>
 
 <%= render @problem %>
 
 <% if can? :create, Answer %>
-  <% if Answer.user_has_correct_answer current_user, @problem%>
+  <% if Answer.user_has_correct_answer? current_user.id, @problem.id%>
     <p> Respuesta correcta! </p>
   <% else %>
+    <p style="color: red"><%= notice %></p> <!-- Para que salga el mensaje de respuesta incorrecta -->
     <%= render "answers/form" %>
   <% end %>
 

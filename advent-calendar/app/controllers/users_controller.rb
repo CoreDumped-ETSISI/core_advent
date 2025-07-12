@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  authorize_resource
+  
 
   # GET /users or /users.json
   def index
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        format.html { redirect_to root_path, notice: "User was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end

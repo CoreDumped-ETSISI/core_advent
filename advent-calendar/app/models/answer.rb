@@ -8,9 +8,9 @@ class Answer < ApplicationRecord
 
   COOLDOWN_MINUTES = 5
 
-  scope :user_has_correct_answer, ->(user, problem) {
-    where(user_id: user.id, problem_id: problem.id, correct: true).exists?
-  }
+  def self.user_has_correct_answer?(user_id, problem_id)
+    where(user_id: user_id, problem_id: problem_id, correct: true).exists?
+  end
 
   # Scope to find recent incorrect answers within cooldown period
   scope :recent_incorrect_for_user_and_problem, ->(user_id, problem_id, minutes_ago = COOLDOWN_MINUTES) {
