@@ -24,17 +24,40 @@ class AnswersController < ApplicationController
   # POST /answers or /answers.json
   def create
     @answer = @problem.answers.build(answer_params)
-    @answer.user = current_user  # Assign the current user
+    @answer.user = current_user
     @answer.correct = @answer.answer_text.downcase.strip === @problem.correct_answer
-
+    
+    # Check if problem is currently unlocked (between unlock_time and lock_time)
+    now = Time.current
+    is_unlocked = now >= @problem.unlock_time && now < @problem.lock_time
+    
     respond_to do |format|
-      save = @answer.save
-      if save and @answer.correct
-        format.html { redirect_to @problem, notice: "Correct answer!" }
-      elsif save
-        format.html { redirect_to @problem, notice: "Incorrect answer!" }
+      if is_unlocked
+        # Normal flow: save to database
+        save = @answer.save
+        if save && @answer.correct
+          format.html { redirect_to @problem, notice: "Correct answer!" }
+        elsif save
+          format.html { redirect_to @problem, notice: "Incorrect answer!" }
+        else
+          format.html { render 'problems/show', status: :unprocessable_entity }
+        end
       else
-        format.html { render :new, status: :unprocessable_entity }
+        # Problem is locked: check answer but don't save
+        if now < @problem.unlock_time
+          # Not yet unlocked
+          format.html { redirect_to @problem, notice: "This problem is not yet available." }
+        elsif now >= @problem.lock_time
+          # Already locked: check answer but don't save
+          if @answer.correct
+            format.html { redirect_to @problem, notice: "Correct answer! (Not saved - problem is locked)" }
+          else
+            format.html { redirect_to @problem, notice: "Incorrect answer! (Not saved - problem is locked)" }
+          end
+        else
+          # No timing set or other edge case
+          format.html { redirect_to @problem, notice: "Problem timing not configured properly." }
+        end
       end
     end
   end
