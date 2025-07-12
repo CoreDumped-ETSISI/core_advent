@@ -1,15 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   authorize_resource
-  
+
 
   # GET /users or /users.json
   def index
+    authorize! :manage, User
     @users = User.all
   end
 
   # GET /users/1 or /users/1.json
   def show
+    authorize! :manage, User
   end
 
   # GET /users/new
@@ -51,6 +53,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to users_path, status: :see_other, notice: "User was successfully destroyed." }
+    end
+  end
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: exception.message }
     end
   end
 
