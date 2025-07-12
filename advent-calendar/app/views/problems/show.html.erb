@@ -3,7 +3,12 @@
 <%= render @problem %>
 
 <% if can? :create, Answer %>
-  <%= render "answers/form" %>
+  <% if Answer.user_has_correct_answer current_user, @problem%>
+    <p> Respuesta correcta! </p>
+  <% else %>
+    <%= render "answers/form" %>
+  <% end %>
+
 <% else %>
   <%= link_to "Login to answer", login_path %>
 <% end %>

@@ -4,13 +4,12 @@ class Answer < ApplicationRecord
 
   validates :problem, presence: true
   validates :answer_text, presence: true
-  validates :correct, presence: true
   validate :check_cooldown_period, on: :create
 
   COOLDOWN_MINUTES = 5
-  
-  scope :user_has_correct_answer, ->(user_id, problem_id) {
-    where(user_id: user_id, problem_id: problem_id, correct: true).exists?
+
+  scope :user_has_correct_answer, ->(user, problem) {
+    where(user_id: user.id, problem_id: problem.id, correct: true).exists?
   }
 
   # Scope to find recent incorrect answers within cooldown period
