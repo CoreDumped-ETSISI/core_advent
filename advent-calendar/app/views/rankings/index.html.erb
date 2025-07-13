@@ -1,24 +1,24 @@
 <div >
-    <%= link_to "Back to problems", problems_by_year_path(@year)%>
+    <%= link_to "Volver a problemas", problems_by_year_path(@year)%>
 
   <div >
-    <h2>Rankings for <%= @year %></h2>
+    <h2>Rankings para <%= @year %></h2>
   </div>
 
   <% if @ranking.empty? %>
     <div >
-      <p>No ranking data available for <%= @year %>.</p>
+      <p>No hay datos para el año <%= @year %>.</p>
     </div>
   <% else %>
     <div >
       <table>
         <thead>
           <tr>
-            <th>Position</th>
-            <th>User</th>
-            <th>Problems Completed</th>
-            <th>Total Time</th>
-            <th>Average Time per Problem</th>
+            <th>Posición</th>
+            <th>Nombre de Usuario</th>
+            <th>Problemas Completados</th>
+            <th>Tiempo total</th>
+            <th>Tiempo medio por problema</th>
           </tr>
         </thead>
         <tbody>
@@ -49,15 +49,15 @@
 
     <div >
       <div >
-        <h3>Total Participants</h3>
+        <h3>Participantes Totales</h3>
         <p><%= @ranking.size %></p>
       </div>
       <div >
-        <h3>Total Problems Solved</h3>
+        <h3>Total de problemas Completados</h3>
         <p><%= @ranking.sum { |r| r[:problems_completed] } %></p>
       </div>
       <div >
-        <h3>Average Problems per User</h3>
+        <h3>Media de problemas por usuario</h3>
         <p><%= (@ranking.sum { |r| r[:problems_completed] }.to_f / @ranking.size).round(1) %></p>
       </div>
     </div>

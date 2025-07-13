@@ -16,7 +16,10 @@ module AdventCalendar
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
     config.time_zone = "Madrid"
-    config.default_locale = :es
+    config.i18n.default_locale = :es
+s
+    # Available locales
+    config.i18n.available_locales = [ :es ]
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

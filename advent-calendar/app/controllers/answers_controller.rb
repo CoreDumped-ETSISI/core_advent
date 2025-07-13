@@ -26,37 +26,37 @@ class AnswersController < ApplicationController
     @answer = @problem.answers.build(answer_params)
     @answer.user = current_user
     @answer.correct = @answer.answer_text.downcase.strip === @problem.correct_answer
-    
+
     # Check if problem is currently unlocked (between unlock_time and lock_time)
     now = Time.current
     is_unlocked = now >= @problem.unlock_time && now < @problem.lock_time
-    
+
     respond_to do |format|
       if is_unlocked
         # Normal flow: save to database
         save = @answer.save
         if save && @answer.correct
-          format.html { redirect_to @problem, notice: "Correct answer!" }
+          format.html { redirect_to @problem, notice: "¡Respuesta correcta!" }
         elsif save
-          format.html { redirect_to @problem, notice: "Incorrect answer!" }
+          format.html { redirect_to @problem, notice: "¡Respuesta incorrecta!" }
         else
-          format.html { render 'problems/show', status: :unprocessable_entity }
+          format.html { render "problems/show", status: :unprocessable_entity }
         end
       else
         # Problem is locked: check answer but don't save
         if now < @problem.unlock_time
           # Not yet unlocked
-          format.html { redirect_to @problem, notice: "This problem is not yet available." }
+          format.html { redirect_to @problem, notice: "Este problema aún no está disponible." }
         elsif now >= @problem.lock_time
           # Already locked: check answer but don't save
           if @answer.correct
-            format.html { redirect_to @problem, notice: "Correct answer! (Not saved - problem is locked)" }
+            format.html { redirect_to @problem, notice: "¡Respuesta correcta! (No guardada - problema bloqueado)" }
           else
-            format.html { redirect_to @problem, notice: "Incorrect answer! (Not saved - problem is locked)" }
+            format.html { redirect_to @problem, notice: "¡Respuesta incorrecta! (No guardada - problema bloqueado)" }
           end
         else
           # No timing set or other edge case
-          format.html { redirect_to @problem, notice: "Problem timing not configured properly." }
+          format.html { redirect_to @problem, notice: "La configuración de tiempo del problema no está configurada correctamente." }
         end
       end
     end
@@ -66,7 +66,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: "Answer was successfully updated." }
+        format.html { redirect_to @answer, notice: "Respuesta actualizada con éxito." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -78,13 +78,13 @@ class AnswersController < ApplicationController
     @answer.destroy!
 
     respond_to do |format|
-      format.html { redirect_to problem_answers_path, status: :see_other, notice: "Answer was successfully destroyed." }
+      format.html { redirect_to problem_answers_path, status: :see_other, notice: "Respuesta borrada con éxito." }
       format.json { head :no_content }
     end
   end
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.html { redirect_to root_path, alert: exception.message }
+      format.html { redirect_to root_path, alert: "No estás autorizad@ para acceder a esa página." }
     end
   end
   private

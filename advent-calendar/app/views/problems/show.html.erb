@@ -10,14 +10,14 @@
   <% end %>
 
 <% else %>
-  <%= link_to "Login to answer", login_path %>
+  <%= link_to "Inicia Sesión para responder", login_path %>
 <% end %>
 
 <div>
-  <%= link_to "Back to problems", problems_by_year_path(@problem.unlock_time.year) %> 
+  <%= link_to "Volver a problemas", problems_by_year_path(@problem.unlock_time.year) %> 
   <% if can? :manage, @problem %> |
-  <%= link_to "Edit this problem", edit_problem_path(@problem) %> |
-  <%= link_to "See answers", problem_answers_path(@problem) %>
-  <%= button_to "Destroy this problem", @problem, method: :delete %>
+  <%= link_to "Editar este problema", edit_problem_path(@problem) %> |
+  <%= link_to "Ver respuestas", problem_answers_path(@problem) %>
+  <%= button_to "Borrar este problema", @problem, method: :delete %>
   <% end %>
 </div>

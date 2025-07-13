@@ -1,7 +1,7 @@
 <%= form_with(model: [@problem, @answer], local: true) do |form| %>
   <% if @answer.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+      <h2><%= t :error, count: @answer.errors.count %> impidieron que esta respuesta pueda ser creada:</h2>
 
       <ul>
         <% @answer.errors.each do |error| %>

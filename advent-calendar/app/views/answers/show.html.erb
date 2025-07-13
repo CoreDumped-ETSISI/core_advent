@@ -3,8 +3,8 @@
 <%= render @answer %>
 
 <div>
-  <%= link_to "Edit this answer", edit_problem_answer_path(@answer.problem, @answer) %> |
-  <%= link_to "Back to answers", problem_answers_path(@answer.problem) %>
+  <%= link_to "Editar respuesta", edit_problem_answer_path(@answer.problem, @answer) %> |
+  <%= link_to "Volver a respuestas", problem_answers_path(@answer.problem) %>
 
-  <%= button_to "Destroy this answer", problem_answer_path(@answer.problem, @answer), method: :delete %>
+  <%= button_to "Borrar respuesta", problem_answer_path(@answer.problem, @answer), method: :delete %>
 </div>

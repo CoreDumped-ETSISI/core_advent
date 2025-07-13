@@ -15,18 +15,18 @@ class Answer < ApplicationRecord
   # Scope to find recent incorrect answers within cooldown period
   scope :recent_incorrect_for_user_and_problem, ->(user_id, problem_id, minutes_ago = COOLDOWN_MINUTES) {
     where(
-      user_id: user_id, 
-      problem_id: problem_id, 
+      user_id: user_id,
+      problem_id: problem_id,
       correct: false,
       created_at: minutes_ago.minutes.ago..Time.current
     )
   }
-  
+
   # Check if user can answer (not in cooldown)
   def self.user_can_answer?(user_id, problem_id)
     recent_incorrect_for_user_and_problem(user_id, problem_id).empty?
   end
-  
+
   # Get remaining cooldown time in seconds
   def self.remaining_cooldown_time(user_id, problem_id)
     last_incorrect = where(
@@ -34,26 +34,26 @@ class Answer < ApplicationRecord
       problem_id: problem_id,
       correct: false
     ).order(created_at: :desc).first
-    
+
     return 0 unless last_incorrect
-    
+
     time_since_last = Time.current - last_incorrect.created_at
     cooldown_seconds = COOLDOWN_MINUTES * 60
-    
+
     return 0 if time_since_last >= cooldown_seconds
-    
+
     (cooldown_seconds - time_since_last).to_i
   end
-  
+
   private
-  
+
   def check_cooldown_period
     return if correct? # No cooldown for correct answers
     return if Answer.user_can_answer?(user_id, problem_id)
-    
+
     remaining_time = Answer.remaining_cooldown_time(user_id, problem_id)
     minutes = (remaining_time / 60.0).ceil
-    
-    errors.add(:base, "You must wait #{minutes} more minute(s) before answering this problem again")
+
+    errors.add(:base, "Debes esperar #{minutes}min antes de poder responder de nuevo a este problema")
   end
 end

@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 <p style="color: red"><%= alert %></p>
 
-<h1>Years</h1>
+<h1>Años</h1>
 
 <div id="years">
   <% @years.each do |year| %>
@@ -10,6 +10,9 @@
     </p>
   <% end %>
 </div>
-<% if can? :manage, @problem %> |
-  <%= link_to "New problem", new_problem_path %>
+<% if can? :manage, @problem %>| GESTIÓN | <br/>
+  <%= link_to "Nuevo problema", new_problem_path %>
+<% end %>
+<% if can? :manage, @users %> |
+  <%= link_to "Usuarios", users_path %>
 <% end %>

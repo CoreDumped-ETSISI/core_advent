@@ -23,12 +23,13 @@
   </head>
 
   <body>
+  <%= link_to "Inicio", root_path %> |
   <% if current_user %>
-    <p>Welcome, <%= current_user.username %>!</p>
-      <%= button_to "Logout", logout_path, method: :delete %>
+    <p>Bienvenid@, <%= current_user.username %>!</p>
+      <%= button_to "Cerrar sesión", logout_path, method: :delete %>
     <% else %>
-      <%= link_to "Login", login_path %>
-      <%= link_to "Sign Up", new_user_path %>
+      <%= link_to "Iniciar Sesión", login_path %> |
+      <%= link_to "Registrarse", new_user_path %>
     <% end %>
     <%= yield %>
   </body>

@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: %i[ show edit update destroy ]
-  authorize_resource except: [:year_index, :index, :show]
+  authorize_resource except: [ :year_index, :index, :show ]
 
   # GET /
   def year_index
@@ -15,7 +15,7 @@ class ProblemsController < ApplicationController
     @problems = Problem.for_year @year
     # Only show problems that the user can read (unlocked ones)
     @problems = @problems.accessible_by(current_ability)
-    
+
     if @problems.size === 0
       render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
     end
@@ -41,7 +41,7 @@ class ProblemsController < ApplicationController
 
     respond_to do |format|
       if @problem.save
-        format.html { redirect_to @problem, notice: "Problem was successfully created." }
+        format.html { redirect_to @problem, notice: "Problema creado con éxito." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -52,7 +52,7 @@ class ProblemsController < ApplicationController
   def update
     respond_to do |format|
       if @problem.update(problem_params)
-        format.html { redirect_to @problem, notice: "Problem was successfully updated." }
+        format.html { redirect_to @problem, notice: "Problema actualizado con éxito." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -64,13 +64,13 @@ class ProblemsController < ApplicationController
     @problem.destroy!
 
     respond_to do |format|
-      format.html { redirect_to problems_path, status: :see_other, notice: "Problem was successfully destroyed." }
+      format.html { redirect_to problems_path, status: :see_other, notice: "Problema borrado con éxito." }
     end
   end
-  
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.html { redirect_to root_path, alert: exception.message }
+      format.html { redirect_to root_path, alert: "No estás autorizad@ para acceder a esa página." }
     end
   end
 

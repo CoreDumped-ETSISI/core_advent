@@ -1,17 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Answers" %>
+<% content_for :title, "Respuestas" %>
 
-<h1>Answers for problem <%= @problem.title %></h1>
+<h1>Respuestas para el problema <%= @problem.title %></h1>
 
 <div id="answers">
   <% @answers.each do |answer| %>
     <%= render answer %>
     <p>
-      <%= link_to "Show this answer", problem_answer_path(answer.problem, answer) %>
+      <%= link_to "Muestra esta respuesta", problem_answer_path(answer.problem, answer) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New answer", new_problem_answer_path %>
-<%= link_to "Go back to problem", @problem %>
+<%= link_to "Volver a problema", @problem %>

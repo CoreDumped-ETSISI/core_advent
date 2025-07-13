@@ -1,11 +1,11 @@
-<% content_for :title, "Editing answer" %>
+<% content_for :title, "Editando respuesta" %>
 
-<h1>Editing answer</h1>
+<h1>Editando respuesta</h1>
 
 <%= form_with(model: [@problem, @answer]) do |form| %>
   <% if @answer.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+      <h2><%= t :error, count: @answer.errors.count %> impidieron que esta respuesta pueda ser guardada:</h2>
 
       <ul>
         <% @answer.errors.each do |error| %>
@@ -31,6 +31,6 @@
 <br>
 
 <div>
-  <%= link_to "Show this answer", problem_answer_path(@problem, @answer) %> |
-  <%= link_to "Back to answers", problem_answers_path(@problem) %>
+  <%= link_to "Muestra esta respuesta", problem_answer_path(@problem, @answer) %> |
+  <%= link_to "Volver a respuestas", problem_answers_path(@problem) %>
 </div>

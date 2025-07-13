@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Problems" %>
+<% content_for :title, "Problemas" %>
 
-<h1>Problems</h1>
+<h1>Problemas</h1>
 <%= link_to "Ranking", ranking_by_year_path(@year)%>
 
 <div id="problems">
@@ -12,7 +12,7 @@
     </p>
   <% end %>
 </div>
-<%= link_to "Back to year selection", root_path%>
+<%= link_to "Volver a selección de año", root_path%>
 <% if can? :manage, @problem %> |
-<%= link_to "New problem", new_problem_path %>
+<%= link_to "Nuevo problema", new_problem_path %>
 <% end %>
