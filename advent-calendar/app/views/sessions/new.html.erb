@@ -1,5 +1,5 @@
-<%= form_with url: "/login", method: :post do |form| %>
-  <% if flash[:alert] %>
+<%= form_with url: "/login", method: :post, local: true do |form| %>
+  <% if flash.now[:alert] %>
     <div class="alert"><%= flash[:alert] %></div>
   <% end %>
   <div>
