@@ -2,15 +2,16 @@
 
 <% content_for :title, "Usuarios" %>
 
-<h1>Usuarios</h1>
+<h1 class="text-xl m-2">Lista de Usuarios</h1>
+<%= link_to "Nuevo usuario", new_user_path, class: "btn btn-primary m-2" %>
 
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Mostrar este usuario", user %>
-    </p>
+    <div class="m-2">
+      <%= render user %>
+      <%= link_to "Mostrar este usuario", user, class: "btn btn-info" %>
+    </div>
+
   <% end %>
 </div>
 
-<%= link_to "Nuevo usuario", new_user_path %>

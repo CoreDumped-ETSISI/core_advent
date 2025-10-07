@@ -23,14 +23,20 @@
   </head>
 
   <body>
-  <%= link_to "Inicio", root_path %> |
-  <% if current_user %>
-    <p>Bienvenid@, <%= current_user.username %>!</p>
-      <%= button_to "Cerrar sesión", logout_path, method: :delete %>
-    <% else %>
-      <%= link_to "Iniciar Sesión", login_path %> |
-      <%= link_to "Registrarse", new_user_path %>
-    <% end %>
+  <div class="navbar bg-base-300 shadow-sm">
+  <div class="navbar-start">
+    <%= link_to "Inicio", root_path, class: "btn" %>
+  </div>
+  <div class="navbar-end flex flex-row">
+      <% if current_user %>
+        <p>Bienvenid@, <%= current_user.username %>!</p>
+          <%= button_to "Cerrar sesión", logout_path, method: :delete, class: "btn btn-primary ml-1" %>
+      <% else %>
+          <%= link_to "Iniciar Sesión", login_path, class: "btn btn-primary mr-1" %>
+          <%= link_to "Registrarse", new_user_path, class: "btn btn-primary" %>
+      <% end %>
+      </div>
+  </div>
     <%= yield %>
   </body>
 </html>

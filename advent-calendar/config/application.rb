@@ -17,7 +17,6 @@ module AdventCalendar
     config.autoload_lib(ignore: %w[assets tasks])
     config.time_zone = "Madrid"
     config.i18n.default_locale = :es
-s
     # Available locales
     config.i18n.available_locales = [ :es ]
     # Configuration for the application, engines, and railties goes here.
