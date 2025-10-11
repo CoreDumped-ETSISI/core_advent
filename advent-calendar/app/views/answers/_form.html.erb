@@ -1,22 +1,27 @@
-<%= form_with(model: [@problem, @answer], local: true) do |form| %>
+<%= form_with(model: [@problem, @answer], local: true, class: "space-y-6 p-6 bg-base-100 shadow-md rounded-lg max-w-2xl mx-auto border") do |form| %>
   <% if @answer.errors.any? %>
-    <div style="color: red">
-      <h2><%= t :error, count: @answer.errors.count %> impidieron que esta respuesta pueda ser creada:</h2>
-
-      <ul>
-        <% @answer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="alert alert-error text-white">
+      <div>
+        <h2 class="font-bold text-lg">
+          <%= t :error, count: @answer.errors.count %> impidieron que esta respuesta pueda ser creada:
+        </h2>
+        <ul class="list-disc list-inside mt-2">
+          <% @answer.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :answer_text, style: "display: block" %>
-    <%= form.text_field :answer_text %>
+  <!-- Answer Text Field -->
+  <div class="form-control">
+    <%= form.label :answer_text, class: "label label-text font-semibold" %>
+    <%= form.text_field :answer_text, class: "input input-bordered w-full" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <!-- Submit Button -->
+  <div class="form-control">
+    <%= form.submit "Enviar Respuesta", class: "btn btn-primary w-full" %>
   </div>
 <% end %>

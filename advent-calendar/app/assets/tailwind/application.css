@@ -41,3 +41,12 @@
   --depth: 1;
   --noise: 0;
 }
+/* Override Trix code block background */
+.trix-content pre {
+  @apply bg-base-200 text-white rounded-lg p-3 overflow-x-auto;
+}
+
+/* Optional: style inline code (like `code`) */
+.trix-content code {
+  @apply bg-base-300 text-base-content rounded px-1;
+}

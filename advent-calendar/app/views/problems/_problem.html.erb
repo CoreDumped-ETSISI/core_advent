@@ -1,10 +1,9 @@
-<div id="<%= dom_id problem %>">
-  <h1>
+<div id="<%= dom_id problem %>" class="card bg-base-100 shadow-md p-6 rounded-lg max-w-3xl mx-auto my-6 border">
+  <h1 class="text-2xl font-bold text-primary mb-4">
     <%= problem.title %>
   </h1>
-
-  <p>
+  <div class="divider"></div>
+  <div class="prose max-w-none">
     <%= problem.content %>
-  </p>
-
+  </div>
 </div>

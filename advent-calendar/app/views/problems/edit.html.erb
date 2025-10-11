@@ -1,12 +1,10 @@
 <% content_for :title, "Editando problema" %>
 
-<h1>Editando problema</h1>
-
 <%= render "form", problem: @problem %>
 
 <br>
 
-<div>
-  <%= link_to "Mostrar problema", @problem %> |
-  <%= link_to "Volver a problemas", problems_by_year_path(@problem.unlock_time.year) %>
+<div class="m-4">
+  <%= link_to "Volver a problemas", problems_by_year_path(@problem.unlock_time.year), class: "btn btn-outline" %>
+  <%= link_to "Mostrar problema", @problem, class: "btn btn-info" %>
 </div>

@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true, uniqueness: true
+  validates :password, length: { minimum: 8 }, if: :password_digest_changed?
 
 
   def self.ranking_for_year(year)

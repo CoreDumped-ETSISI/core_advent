@@ -1,9 +1,7 @@
 <div id="<%= dom_id answer %>">
   <p>
     <strong>Correcto:</strong>
-    <%= answer.correct %>
-  </p>
-
+    <%= answer.correct ? "Sí" : "No" %>  </p>
   <p>
     <strong>Texto de respuesta:</strong>
     <%= answer.answer_text %>
@@ -13,7 +11,4 @@
     <strong>Creado el:</strong>
     <%= answer.created_at %>
   </p>
-
-  
-
 </div>

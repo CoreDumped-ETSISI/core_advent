@@ -1,42 +1,51 @@
-<%= form_with(model: problem) do |form| %>
+<%= form_with(model: problem, class: "space-y-6 p-6 bg-base-100 shadow-md rounded-lg max-w-2xl mx-auto") do |form| %>
   <% if problem.errors.any? %>
-    <div style="color: red">
-      <h2><%= t :error, count: problem.errors.count %> impidieron que este problema pueda ser creado:</h2>
-
-      <ul>
-        <% problem.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="alert alert-error text-white">
+      <div>
+        <h2 class="font-bold text-lg">
+          <%= t :error, count: problem.errors.count %> impidieron que este problema pueda ser creado:
+        </h2>
+        <ul class="list-disc list-inside mt-2">
+          <% problem.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <!-- Title Field -->
+  <div class="form-control">
+    <%= form.label :title, class: "label label-text font-semibold" %>
+    <%= form.text_field :title, class: "input input-bordered w-full" %>
   </div>
 
-  <div>
-    <%= form.label :content %>
-    <%= form.rich_textarea :content %>
+  <!-- Content Field -->
+  <div class="form-control bg-white rounded-box p-4">
+    <%= form.label :content, class: "label label-text font-semibold text-black" %>
+    <%= form.rich_text_area :content, class: "w-full min-h-[50rem] border border-black rounded-lg p-3 text-black" %>
   </div>
 
-  <div>
-    <%= form.label :correct_answer, style: "display: block" %>
-    <%= form.text_field :correct_answer %>
+  <!-- Correct Answer Field -->
+  <div class="form-control">
+    <%= form.label :correct_answer, class: "label label-text font-semibold" %>
+    <%= form.text_field :correct_answer, class: "input input-bordered w-full" %>
   </div>
 
-  <div>
-    <%= form.label :unlock_time, style: "display: block" %>
-    <%= form.datetime_field :unlock_time %>
+  <!-- Unlock Time Field -->
+  <div class="form-control">
+    <%= form.label :unlock_time, class: "label label-text font-semibold" %>
+    <%= form.datetime_field :unlock_time, class: "input input-bordered w-full" %>
   </div>
 
-  <div>
-    <%= form.label :lock_time, style: "display: block" %>
-    <%= form.datetime_field :lock_time %>
+  <!-- Lock Time Field -->
+  <div class="form-control">
+    <%= form.label :lock_time, class: "label label-text font-semibold" %>
+    <%= form.datetime_field :lock_time, class: "input input-bordered w-full" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <!-- Submit Button -->
+  <div class="form-control">
+    <%= form.submit "Guardar Problema", class: "btn btn-primary w-full" %>
   </div>
 <% end %>

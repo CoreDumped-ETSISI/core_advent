@@ -1,11 +1,9 @@
 <% content_for :title, "Nueva respuesta" %>
 
-<h1>New answer</h1>
-
 <%= render "form", answer: @answer %>
 
 <br>
 
 <div>
-  <%= link_to "Volver a respuestas", problem_answers_path(@answer.problem) %>
+  <%= link_to "Volver a respuestas", problem_answers_path(@answer.problem), class: "btn btn-outline" %>
 </div>

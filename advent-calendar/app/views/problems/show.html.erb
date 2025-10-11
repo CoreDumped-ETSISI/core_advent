@@ -1,23 +1,30 @@
-
 <%= render @problem %>
 
 <% if can? :create, Answer %>
-  <% if Answer.user_has_correct_answer? current_user.id, @problem.id%>
-    <p> Respuesta correcta! </p>
+  <% if Answer.user_has_correct_answer? current_user.id, @problem.id %>
+    <div class="alert alert-success text-black m-6">
+      <p>Respuesta correcta! 🎉</p>
+    </div>
   <% else %>
-    <p><%= notice %></p> <!-- Para que salga el mensaje de respuesta -->
-    <%= render "answers/form" %>
+    <% if notice.present? %>
+      <div class="alert alert-warning text-black m-6">
+        <p><%= notice %></p>
+      </div>
+    <% end %>
+    <%= render "answers/form", class: "mt-4" %>
   <% end %>
 
 <% else %>
-  <%= link_to "Inicia Sesión para responder", login_path %>
+  <%= link_to "Inicia Sesión para responder", login_path, class: "btn btn-primary m-6" %>
 <% end %>
 
-<div>
-  <%= link_to "Volver a problemas", problems_by_year_path(@problem.unlock_time.year) %> 
-  <% if can? :manage, @problem %> |
-  <%= link_to "Editar este problema", edit_problem_path(@problem) %> |
-  <%= link_to "Ver respuestas", problem_answers_path(@problem) %>
-  <%= button_to "Borrar este problema", @problem, method: :delete %>
+<!-- Navigation and Action Links -->
+<div class="flex space-x-4 m-6">
+  <%= link_to "Volver a problemas", problems_by_year_path(@problem.unlock_time.year), class: "btn btn-outline" %> 
+
+  <% if can? :manage, @problem %>
+    <%= link_to "Editar este problema", edit_problem_path(@problem), class: "btn btn-warning" %>
+    <%= link_to "Ver respuestas", problem_answers_path(@problem), class: "btn btn-info" %>
+    <%= button_to "Borrar este problema", @problem, method: :delete, class: "btn btn-error" %>
   <% end %>
 </div>

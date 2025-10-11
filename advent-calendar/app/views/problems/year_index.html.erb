@@ -1,18 +1,45 @@
 <p style="color: green"><%= notice %></p>
 <p style="color: red"><%= alert %></p>
-
-<h1>Años</h1>
-
+<div class="flex justify-center items-center flex-col mt-6">
+<pre>
+             /\
+            &lt;  >
+             \/
+             /\
+            /  \
+           /++++\
+          /  ()  \
+          /      \
+         /~`~`~`~`\
+        /  ()  ()  \
+        /           \
+       /*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;\
+      /  ()  ()  ()  \
+      /              \
+     /++++++++++++++++\
+    /  ()  ()  ()  ()  \
+    /                  \
+   /~`~`~`~`~`~`~`~`~`~`\
+  /  ()  ()  ()  ()  ()  \
+  /*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;\
+ /                        \
+/,.,.,.,.,.,.,.,.,.,.,.,.,.\
+</pre>
 <div id="years">
   <% @years.each do |year| %>
-    <p>
-      <%= link_to year, problems_by_year_path(year) %>
+    <p class="text-center">
+      [<%= link_to year, problems_by_year_path(year), class: "link" %>]
+      <br/>
+      <pre>|   |</pre>
     </p>
   <% end %>
 </div>
-<% if can? :manage, @problem %>| GESTIÓN | <br/>
-  <%= link_to "Nuevo problema", new_problem_path %>
+</div>
+</div>
+
+<% if can? :manage, @problem %>
+  <%= link_to "Nuevo problema", new_problem_path, class: "btn btn-primary ml-4" %>
 <% end %>
-<% if can? :manage, @users %> |
-  <%= link_to "Usuarios", users_path %>
+<% if can? :manage, @users %>
+  <%= link_to "Usuarios", users_path, class: "btn btn-info ml-4" %>
 <% end %>

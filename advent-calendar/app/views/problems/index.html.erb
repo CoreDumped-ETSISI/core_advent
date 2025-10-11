@@ -1,18 +1,49 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Problemas" %>
+<div class="flex justify-center items-center flex-col mt-6">
+<pre>
+             /\
+            &lt;  >
+             \/
+             /\
+            /  \
+           /++++\
+          /  ()  \
+          /      \
+         /~`~`~`~`\
+        /  ()  ()  \
+        /           \
+       /*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;\
+      /  ()  ()  ()  \
+      /              \
+     /++++++++++++++++\
+    /  ()  ()  ()  ()  \
+    /                  \
+   /~`~`~`~`~`~`~`~`~`~`\
+  /  ()  ()  ()  ()  ()  \
+  /*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;*&amp;\
+ /                        \
+/,.,.,.,.,.,.,.,.,.,.,.,.,.\
+</pre>
+<%= link_to "[Ranking]", ranking_by_year_path(@year), class: "link"%>
+  <pre>|    |</pre>
 
-<h1>Problemas</h1>
-<%= link_to "Ranking", ranking_by_year_path(@year)%>
-
-<div id="problems">
+<div id="problems" >
   <% @problems.each do |problem| %>
-    <p>
-      <%= link_to problem.title, problem %>
+    <p class="text-center">
+      [<%= link_to problem.title, problem, class: "link" %>]
+      <br/>
+      <pre>|    |</pre>
     </p>
+
   <% end %>
 </div>
-<%= link_to "Volver a selección de año", root_path%>
-<% if can? :manage, @problem %> |
-<%= link_to "Nuevo problema", new_problem_path %>
+</div>
+<div class="m-4 flex space-x-4">
+<%= link_to "Volver a selección de año", root_path, class: "btn btn-outline"%>
+<% if can? :manage, @problem %>
+<%= link_to "Nuevo problema", new_problem_path, class: "btn btn-primary" %>
+</div>
+
 <% end %>

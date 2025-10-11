@@ -48,7 +48,6 @@ class Answer < ApplicationRecord
   private
 
   def check_cooldown_period
-    return if correct? # No cooldown for correct answers
     return if Answer.user_can_answer?(user_id, problem_id)
 
     remaining_time = Answer.remaining_cooldown_time(user_id, problem_id)

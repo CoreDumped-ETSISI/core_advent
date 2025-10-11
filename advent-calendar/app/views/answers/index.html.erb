@@ -2,15 +2,14 @@
 
 <% content_for :title, "Respuestas" %>
 
-<h1>Respuestas para el problema <%= @problem.title %></h1>
-
+<h1 class="text-xl mt-4 mb-4">Respuestas para el problema <%= @problem.title %></h1>
 <div id="answers">
   <% @answers.each do |answer| %>
+  <div class="mb-4">
     <%= render answer %>
-    <p>
-      <%= link_to "Muestra esta respuesta", problem_answer_path(answer.problem, answer) %>
-    </p>
+    <%= link_to "Muestra esta respuesta", problem_answer_path(answer.problem, answer), class: "btn btn-info" %>
+  </div>
   <% end %>
 </div>
 
-<%= link_to "Volver a problema", @problem %>
+<%= link_to "Volver a problema", @problem, class: "btn btn-outline" %>

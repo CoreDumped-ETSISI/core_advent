@@ -2,9 +2,9 @@
 
 <%= render @user %>
 
-<div>
-  <%= link_to "Editar este usuario", edit_user_path(@user), class: "btn btn-info" %> |
-  <%= link_to "Volver a usuarios", users_path, class: "btn btn-success" %>
+<div class="m-4 flex space-x-4">
+  <%= link_to "Volver a usuarios", users_path, class: "btn btn-outline" %>
 
+  <%= link_to "Editar este usuario", edit_user_path(@user), class: "btn btn-info" %>
   <%= button_to "Borrar este usuario", @user, method: :delete, class: "btn btn-error" %>
 </div>

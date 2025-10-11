@@ -1,17 +1,17 @@
-<div >
-    <%= link_to "Volver a problemas", problems_by_year_path(@year)%>
+<%= link_to "Volver a problemas", problems_by_year_path(@year), class: "btn btn-outline mt-4 ml-4"%>
+<div class="flex flex-col content-center items-center mt-8">
 
-  <div >
-    <h2>Rankings para <%= @year %></h2>
+  <div>
+    <h2 class="text-xl">Rankings para <%= @year %></h2>
   </div>
 
   <% if @ranking.empty? %>
-    <div >
+    <div>
       <p>No hay datos para el año <%= @year %>.</p>
     </div>
   <% else %>
-    <div >
-      <table>
+    <div class="overflow-x-auto">
+      <table class="table">
         <thead>
           <tr>
             <th>Posición</th>
@@ -23,7 +23,13 @@
         </thead>
         <tbody>
           <% @ranking.each do |entry| %>
+          <% if entry[:user] === current_user.username %>
+          <tr class="bg-base-200">
+            <% else %>
             <tr >
+
+            <% end %>
+            
               <td >
                 <span >
                   <%= entry[:position] %>
@@ -47,18 +53,20 @@
       </table>
     </div>
 
-    <div >
-      <div >
-        <h3>Participantes Totales</h3>
-        <p><%= @ranking.size %></p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+      <div class="card bg-base-100 shadow-md p-4 rounded-lg">
+        <h3 class="text-lg font-semibold text-primary">Participantes Totales</h3>
+        <p class="text-2xl font-bold"><%= @ranking.size %></p>
       </div>
-      <div >
-        <h3>Total de problemas Completados</h3>
-        <p><%= @ranking.sum { |r| r[:problems_completed] } %></p>
+      
+      <div class="card bg-base-100 shadow-md p-4 rounded-lg">
+        <h3 class="text-lg font-semibold text-primary">Total de problemas Completados</h3>
+        <p class="text-2xl font-bold"><%= @ranking.sum { |r| r[:problems_completed] } %></p>
       </div>
-      <div >
-        <h3>Media de problemas por usuario</h3>
-        <p><%= (@ranking.sum { |r| r[:problems_completed] }.to_f / @ranking.size).round(1) %></p>
+
+      <div class="card bg-base-100 shadow-md p-4 rounded-lg">
+        <h3 class="text-lg font-semibold text-primary">Media de problemas por usuario</h3>
+        <p class="text-2xl font-bold"><%= (@ranking.sum { |r| r[:problems_completed] }.to_f / @ranking.size).round(1) %></p>
       </div>
     </div>
   <% end %>

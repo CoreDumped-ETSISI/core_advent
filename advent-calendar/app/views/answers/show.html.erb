@@ -3,8 +3,7 @@
 <%= render @answer %>
 
 <div>
-  <%= link_to "Editar respuesta", edit_problem_answer_path(@answer.problem, @answer) %> |
-  <%= link_to "Volver a respuestas", problem_answers_path(@answer.problem) %>
-
-  <%= button_to "Borrar respuesta", problem_answer_path(@answer.problem, @answer), method: :delete %>
+  <%= link_to "Volver a respuestas", problem_answers_path(@answer.problem), class: "btn btn-outline" %>
+  <%= link_to "Editar respuesta", edit_problem_answer_path(@answer.problem, @answer), class: "btn btn-info" %>
+  <%= button_to "Borrar respuesta", problem_answer_path(@answer.problem, @answer), method: :delete, class: "btn btn-error" %>
 </div>
