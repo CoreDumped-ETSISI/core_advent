@@ -27,14 +27,13 @@
 /,.,.,.,.,.,.,.,.,.,.,.,.,.\
 </pre>
 <%= link_to "[Ranking]", ranking_by_year_path(@year), class: "link"%>
-  <pre>|    |</pre>
+|&emsp;&emsp;&emsp;|
 
 <div id="problems" >
   <% @problems.each do |problem| %>
     <p class="text-center">
       [<%= link_to problem.title, problem, class: "link" %>]
-      <br/>
-      <pre>|    |</pre>
+      <br/>|&emsp;&emsp;&emsp;|
     </p>
 
   <% end %>

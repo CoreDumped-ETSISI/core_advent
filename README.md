@@ -33,7 +33,11 @@
 
 ## Usage
 
-[Instructions on how to use the project, along with code examples or relevant screenshots if applicable.]
+1. Clone this repository
+2. Enter the `advent-calendar` folder
+3. Run `RAILS_MASTER_KEY=<Insert here content of master.key> docker compose up --build`
+4. Execute a shell inside the container and run `bundle exec rails c`
+5. Create an admin user by running `User.create!(email: "email@am.es", username: "username", password: "1234", password_confirmation: "1234", admin: true)`
 
 ## Contributing
 
