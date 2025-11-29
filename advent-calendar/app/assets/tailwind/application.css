@@ -51,6 +51,14 @@
   @apply bg-base-300 text-base-content rounded px-1;
 }
 
+trix-editor a {
+  @apply underline;
+}
+
 .trix-content a {
   @apply underline;
+}
+
+trix-editor h1 {
+  @apply text-xl;
 }

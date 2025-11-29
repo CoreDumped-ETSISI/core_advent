@@ -15,6 +15,7 @@ class ProblemsController < ApplicationController
     @problems = Problem.for_year @year
     # Only show problems that the user can read (unlocked ones)
     @problems = @problems.accessible_by(current_ability)
+    @problems = @problems.order("unlock_time ASC")
 
     if @problems.size === 0
       render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
