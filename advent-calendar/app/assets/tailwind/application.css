@@ -7,7 +7,7 @@
 @plugin "./daisyui.mjs";
 
 /* Optional for custom themes – Docs: https://daisyui.com/docs/themes/#how-to-add-a-new-custom-theme */
-@plugin "./daisyui-theme.mjs"{
+@plugin "./daisyui-theme.mjs" {
   name: "christmas";
   default: true;
   prefersdark: true;
@@ -49,4 +49,8 @@
 /* Optional: style inline code (like `code`) */
 .trix-content code {
   @apply bg-base-300 text-base-content rounded px-1;
+}
+
+.trix-content a {
+  @apply underline;
 }

@@ -64,7 +64,7 @@ class ProblemsController < ApplicationController
     @problem.destroy!
 
     respond_to do |format|
-      format.html { redirect_to problems_path, status: :see_other, notice: "Problema borrado con éxito." }
+      format.html { redirect_to root_path, status: :see_other, notice: "Problema borrado con éxito." }
     end
   end
 

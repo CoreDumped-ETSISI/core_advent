@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/1 or /answers/1.json
   def show
-  end
+d
 
   # GET /answers/new
   def new
