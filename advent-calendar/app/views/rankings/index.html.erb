@@ -21,7 +21,7 @@
         </thead>
         <tbody>
 <% @ranking.each do |entry| %>
-<% if entry[:user] === current_user.username %>
+<% if current_user && entry[:user] === current_user.username %>
           <tr class="bg-base-200">
 <% else %>
             <tr>
