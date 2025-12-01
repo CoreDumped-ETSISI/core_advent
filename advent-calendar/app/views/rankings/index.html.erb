@@ -1,73 +1,70 @@
 <%= link_to "Volver a problemas", problems_by_year_path(@year), class: "btn btn-outline mt-4 ml-4"%>
-<div class="flex flex-col content-center items-center mt-8">
-
+<div class="flex flex-col content-center items-center mt-8 px-4">
   <div>
     <h2 class="text-xl">Rankings para <%= @year %></h2>
   </div>
-
-  <% if @ranking.empty? %>
+<% if @ranking.empty? %>
     <div>
       <p>No hay datos para el año <%= @year %>.</p>
     </div>
-  <% else %>
-    <div class="overflow-x-auto">
-      <table class="table">
+<% else %>
+    <div class="w-full md:w-auto max-w-full overflow-x-auto">
+      <table class="table table-zebra">
         <thead>
           <tr>
-            <th>Posición</th>
-            <th>Nombre de Usuario</th>
-            <th>Problemas Completados</th>
-            <th>Tiempo total</th>
-            <th>Tiempo medio por problema</th>
+            <th class="whitespace-nowrap">Posición</th>
+            <th class="whitespace-nowrap">Nombre de Usuario</th>
+            <th class="whitespace-nowrap">Problemas Completados</th>
+            <th class="whitespace-nowrap">Tiempo total</th>
+            <th class="whitespace-nowrap">Tiempo medio por problema</th>
           </tr>
         </thead>
         <tbody>
-          <% @ranking.each do |entry| %>
-          <% if entry[:user] === current_user.username %>
+<% @ranking.each do |entry| %>
+<% if entry[:user] === current_user.username %>
           <tr class="bg-base-200">
-            <% else %>
-            <tr >
-
-            <% end %>
-            
-              <td >
-                <span >
-                  <%= entry[:position] %>
+<% else %>
+            <tr>
+<% end %>
+              <td class="whitespace-nowrap">
+                <span>
+<%= entry[:position] %>
                 </span>
               </td>
-              <td >
+              <td class="whitespace-nowrap">
                 <strong><%= entry[:user] %></strong>
               </td>
-              <td >
-                <span ><%= entry[:problems_completed] %></span>
+              <td class="whitespace-nowrap">
+                <span><%= entry[:problems_completed] %></span>
               </td>
-              <td >
-                <%= format_duration(entry[:total_time_seconds]) %>
+              <td class="whitespace-nowrap">
+<%= format_duration(entry[:total_time_seconds]) %>
               </td>
-              <td >
-                <%= format_duration(entry[:average_time_per_problem]) %>
+              <td class="whitespace-nowrap">
+<%= format_duration(entry[:average_time_per_problem]) %>
               </td>
             </tr>
-          <% end %>
+<% end %>
         </tbody>
       </table>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 w-full max-w-6xl">
       <div class="card bg-base-100 shadow-md p-4 rounded-lg">
         <h3 class="text-lg font-semibold text-primary">Participantes Totales</h3>
         <p class="text-2xl font-bold"><%= @ranking.size %></p>
       </div>
-      
       <div class="card bg-base-100 shadow-md p-4 rounded-lg">
         <h3 class="text-lg font-semibold text-primary">Total de problemas Completados</h3>
         <p class="text-2xl font-bold"><%= @ranking.sum { |r| r[:problems_completed] } %></p>
       </div>
-
       <div class="card bg-base-100 shadow-md p-4 rounded-lg">
         <h3 class="text-lg font-semibold text-primary">Media de problemas por usuario</h3>
         <p class="text-2xl font-bold"><%= (@ranking.sum { |r| r[:problems_completed] }.to_f / @ranking.size).round(1) %></p>
       </div>
+      <div class="card bg-base-100 shadow-md p-4 rounded-lg">
+        <h3 class="text-lg font-semibold text-primary">Tiempo medio de resolución</h3>
+        <p class="text-2xl font-bold"><%= format_duration(@ranking.sum { |r| r[:average_time_per_problem] } / @ranking.size) %></p>
+      </div>
     </div>
-  <% end %>
+<% end %>
 </div>
