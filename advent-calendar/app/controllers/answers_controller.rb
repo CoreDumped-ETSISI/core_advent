@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
   # GET /answers or /answers.json
   def index
-    @answers = Answer.all
+    @answers = @problem.answers
   end
 
   # GET /answers/1 or /answers/1.json
