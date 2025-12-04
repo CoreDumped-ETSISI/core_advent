@@ -65,7 +65,11 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1 or /answers/1.json
   def update
     respond_to do |format|
-      if @answer.update(answer_params)
+      # Recalculate correct before updating
+      @answer.assign_attributes(answer_params)
+      @answer.correct = @answer.answer_text.downcase.strip === @problem.correct_answer
+      
+      if @answer.save
         format.html { redirect_to problem_answer_path, notice: "Respuesta actualizada con éxito." }
       else
         format.html { render :edit, status: :unprocessable_entity }
