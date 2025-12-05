@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: %i[ show edit update destroy ]
-  authorize_resource except: [ :year_index, :index, :show ]
+  authorize_resource except: [ :year_index, :index ]
 
   # GET /
   def year_index
